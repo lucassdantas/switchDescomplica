@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escolha de Bebida</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        select {
+            padding: 8px;
+            font-size: 16px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px;
+            font-size: 16px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            margin-top:12px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .messageArea {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .valueMessage {
+            margin: 0;
+            padding: 10px;
+            background-color: #dff0d8;
+            border: 1px solid #d6e9c6;
+            color: #3c763d;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Escolha sua bebida:</h1>
+
+    <select id="selectedDrink">
+        <option value="coffe">Café</option>
+        <option value="milk">Leite</option>
+        <option value="tee">Chá</option>
+    </select>
+
+    <button id="valueCalcButton">Calcular Valor</button>
+
+    <div class="messageArea">
+        <p id="valueMessage"></p>
+    </div>
+
+    <script defer>
+        function calcularValorBebida() {
+            let 
+            selectElement = document.getElementById("selectedDrink"),
+            selectedMessage = document.querySelector('#valueMessage'),
+            selectedOption = [selectElement.value, selectElement.selectedOptions[0].label],
+            valor,
+            message
+            invalidOption = false;
+            switch (selectedOption[0]) {
+                case 'coffe':
+                    valor = 2.50;
+                    break;
+                case 'milk':
+                    valor = 3.00;
+                    break;
+                case 'tee':
+                    valor = 2.00;
+                    break;
+                default:
+                    invalidOption = true;
+                    return;
+            }
+
+            message = `Você escolheu ${selectedOption[1].toLowerCase()} e o valor a ser pago é R$ ${valor.toFixed(2)}.`
+            if(invalidOption) message = "Escolha inválida. Por favor, escolha entre café, leite ou chá."
+            if(!selectedMessage.classList.contains('valueMessage')) selectedMessage.classList.add('valueMessage')
+            selectedMessage.innerText = message
+        }
+        
+        document.querySelector('#valueCalcButton').addEventListener('click' , calcularValorBebida)
+    </script>
+
+</body>
+</html>
